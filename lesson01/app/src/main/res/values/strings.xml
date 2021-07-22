@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Lesson 1</string>
+    <string name="hello">Привет!</string>
+    <string name="hint_EditText">введи сюда что-нибудь</string>
+    <string name="text_Button">можешь нажать меня</string>
+    <string name="text_Switch">переключи меня</string>
+    <string name="text_CheckBox">поставь галочку</string>
+    <string name="text_for_EditTextOne">можете ввести сюда любой текст</string>
+    <string name="text_for_editTextTwo">введите Ф.И.О.</string>
+    <string name="text_for_EditTextThree">введите номер телефона</string>
+    <string name="text_for_EditTextFour">введите любое число</string>
+    <string name="text_for_EditTextFive">введите текстовый пароль</string>
+    <string name="text_for_EditTextSix">введите электронный адрес</string>
+
+</resources>
