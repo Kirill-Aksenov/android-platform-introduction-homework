@@ -24,11 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:autofillHints=""
         android:hint="@string/hint_EditText"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="@color/my_grey" />
+        android:textColor="@color/my_grey"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/button"
