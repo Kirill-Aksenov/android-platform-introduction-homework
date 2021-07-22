@@ -5,78 +5,76 @@
     android:layout_height="match_parent"
     android:background="@color/my_yellow_green"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/hello"
+        android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-black"
+        android:text="@string/hello"
         android:textColor="@color/my_grey"
-        android:textSize="25sp"
-        android:layout_marginTop="15dp" />
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="270sp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:autofillHints=""
         android:hint="@string/hint_EditText"
-        android:textAlignment="center"
         android:inputType="text"
-        android:textColor="@color/my_grey"
-        android:textColorHighlight="@color/my_grey"
-        android:textColorLink="@color/my_grey"
-        android:layout_marginTop="10dp" />
+        android:textAlignment="center"
+        android:textColor="@color/my_grey" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="@string/text_Button"
         android:textColor="@color/my_yellow_green"
-        android:textSize="15sp"
-        android:layout_marginTop="10dp" />
+        android:textSize="15sp" />
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/text_Switch"
         android:textAlignment="center"
         android:textColor="@color/my_grey"
         android:textSize="24sp"
-        android:fontFamily="sans-serif-black"
-        android:layout_marginTop="10dp" />
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         android:background="@color/my_yellow"
+        android:fontFamily="sans-serif-light"
         android:text="@string/text_CheckBox"
         android:textAlignment="center"
         android:textColor="@color/my_grey"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-light"
-        android:layout_marginTop="15dp" />
+        android:textSize="24sp" />
 
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         android:background="@color/teal_700"
         android:fontFamily="casual"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp" />
+        android:textSize="20sp" />
 
     <CalendarView
         android:id="@+id/calendarView"
