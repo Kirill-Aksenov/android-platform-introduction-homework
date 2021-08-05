@@ -1,5 +1,6 @@
 package ru.geekbraines.lesson03;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final static String CALCULATOR_KEY = "CALCULATOR_KEY";
 
     private Calculator calculator;
 
@@ -73,5 +76,19 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < actionsIds.length; i++) {
             findViewById(actionsIds[i]).setOnClickListener(actionButtonOnClickListener);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(CALCULATOR_KEY, calculator);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        calculator = savedInstanceState.getParcelable(CALCULATOR_KEY);
+        tvActions.setText(calculator.getActions());
+        tvResult.setText(calculator.getResult());
     }
 }

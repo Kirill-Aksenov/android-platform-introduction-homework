@@ -1,18 +1,52 @@
 package ru.geekbraines.lesson03;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.DecimalFormat;
 
-public class Calculator {
+public class Calculator implements Parcelable {
 
     private double firstArg;
     private double secondArg;
     private int actionSelected;
 
     private StringBuilder inputStr = new StringBuilder();
-    private DecimalFormat decimalFormat = new DecimalFormat( "#.###" );
+    private DecimalFormat decimalFormat = new DecimalFormat("#.###");
     private String result;
-
     private State state;
+
+    protected Calculator(Parcel in) {
+        firstArg = in.readDouble();
+        secondArg = in.readDouble();
+        actionSelected = in.readInt();
+        result = in.readString();
+    }
+
+    public static final Creator<Calculator> CREATOR = new Creator<Calculator>() {
+        @Override
+        public Calculator createFromParcel(Parcel in) {
+            return new Calculator(in);
+        }
+
+        @Override
+        public Calculator[] newArray(int size) {
+            return new Calculator[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(firstArg);
+        dest.writeDouble(secondArg);
+        dest.writeInt(actionSelected);
+        dest.writeString(result);
+    }
 
     private enum State {
         firstArgInput,
@@ -30,7 +64,7 @@ public class Calculator {
         if (state == State.resultShow) {
             state = State.firstArgInput;
             inputStr.setLength(0);
-            result = "";
+            result = null;
         }
 
         if (inputStr.length() < 9 || state == State.secondArgInput && inputStr.length() < 21) {
@@ -72,7 +106,6 @@ public class Calculator {
                     break;
             }
         }
-
     }
 
     public void onActionPressed(int actionId) {
@@ -96,7 +129,6 @@ public class Calculator {
             String temp = inputStr.substring(position + 3);
             secondArg = Double.parseDouble(temp);
             state = State.resultShow;
-            inputStr.setLength(0);
 
             switch (actionSelected) {
                 case R.id.plus:
