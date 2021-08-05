@@ -79,28 +79,37 @@ public class Calculator {
 
         if (actionId == R.id.clear) {
             inputStr.setLength(0);
-            result = "";
+            result = null;
+        }
+
+        if (result != null) {
+            inputStr.replace(0, inputStr.length(), result);
+            result = null;
+            firstArg = Double.parseDouble(inputStr.toString());
+            state = State.secondArgInput;
+
+            addsAction(actionId);
         }
 
         if (actionId == R.id.equals && state == State.secondArgInput) {
             int position = inputStr.indexOf(" ");
-            String secondArg = inputStr.substring(position + 3);
-            this.secondArg = Double.parseDouble(secondArg);
+            String temp = inputStr.substring(position + 3);
+            secondArg = Double.parseDouble(temp);
             state = State.resultShow;
             inputStr.setLength(0);
 
             switch (actionSelected) {
                 case R.id.plus:
-                    result = decimalFormat.format(firstArg + this.secondArg);
+                    result = decimalFormat.format(firstArg + secondArg);
                     break;
                 case R.id.minus:
-                    result = decimalFormat.format(firstArg - this.secondArg);
+                    result = decimalFormat.format(firstArg - secondArg);
                     break;
                 case R.id.multiply:
-                    result = decimalFormat.format(firstArg * this.secondArg);
+                    result = decimalFormat.format(firstArg * secondArg);
                     break;
                 case R.id.divide:
-                    result = decimalFormat.format(firstArg / this.secondArg);
+                    result = decimalFormat.format(firstArg / secondArg);
                     break;
             }
 
@@ -108,24 +117,28 @@ public class Calculator {
             firstArg = Double.parseDouble(inputStr.toString());
             state = State.secondArgInput;
 
-            switch (actionId) {
-                case R.id.plus:
-                    actionSelected = R.id.plus;
-                    inputStr.append(" + ");
-                    break;
-                case R.id.minus:
-                    actionSelected = R.id.minus;
-                    inputStr.append(" - ");
-                    break;
-                case R.id.multiply:
-                    actionSelected = R.id.multiply;
-                    inputStr.append(" × ");
-                    break;
-                case R.id.divide:
-                    actionSelected = R.id.divide;
-                    inputStr.append(" ÷ ");
-                    break;
-            }
+            addsAction(actionId);
+        }
+    }
+
+    private void addsAction(int actionId) {
+        switch (actionId) {
+            case R.id.plus:
+                actionSelected = R.id.plus;
+                inputStr.append(" + ");
+                break;
+            case R.id.minus:
+                actionSelected = R.id.minus;
+                inputStr.append(" - ");
+                break;
+            case R.id.multiply:
+                actionSelected = R.id.multiply;
+                inputStr.append(" × ");
+                break;
+            case R.id.divide:
+                actionSelected = R.id.divide;
+                inputStr.append(" ÷ ");
+                break;
         }
     }
 
