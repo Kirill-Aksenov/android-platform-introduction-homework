@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tv_textSize">32sp</dimen>
+
+    <dimen name="tv_actions_width_port">297dp</dimen>
+    <dimen name="tv_result_width_port">372dp</dimen>
+    <dimen name="tv_actions_height_port">130dp</dimen>
+    <dimen name="tv_result_height_port">130dp</dimen>
+    <dimen name="button_width_port">90dp</dimen>
+    <dimen name="button_height_port">90dp</dimen>
+    <dimen name="button_action_width_port">90dp</dimen>
+    <dimen name="button_action_height_port">72dp</dimen>
+
+    <dimen name="tv_actions_width_land">635dp</dimen>
+    <dimen name="tv_result_width_land">710dp</dimen>
+    <dimen name="tv_actions_height_land">60dp</dimen>
+    <dimen name="tv_result_height_land">60dp</dimen>
+    <dimen name="button_width_land">115dp</dimen>
+    <dimen name="button_height_land">60dp</dimen>
+    <dimen name="button_equals_land">120dp</dimen>
+    <dimen name="margin">4dp</dimen>
+
+</resources>
