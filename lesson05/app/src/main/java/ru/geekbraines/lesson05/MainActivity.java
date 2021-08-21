@@ -1,16 +1,17 @@
 package ru.geekbraines.lesson05;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import ru.geekbraines.lesson05.R;
+import static ru.geekbraines.lesson05.SettingsActivity.KEY_THEME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,12 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvActions;
     private TextView tvResult;
-    private ImageButton buttonSettings;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences(KEY_THEME, MODE_PRIVATE);
 
         int[] numbersIds = new int[]{
                 R.id.num_0,
@@ -53,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         tvActions = findViewById(R.id.tv_actions);
         tvResult = findViewById(R.id.tv_result);
 
-        buttonSettings = findViewById(R.id.imageButton_settings);
+        ImageButton buttonSettings = findViewById(R.id.imageButton_settings);
+        checkNightModeActivated();
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < actionsIds.length; i++) {
             findViewById(actionsIds[i]).setOnClickListener(actionButtonOnClickListener);
+        }
+
+
+    }
+
+    public void checkNightModeActivated() {
+        if (sharedPreferences.getBoolean(KEY_THEME, false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 

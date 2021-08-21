@@ -11,13 +11,12 @@ import android.widget.RadioButton;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private static final String KEY_THEME = "keyTheme";
+    protected static final String KEY_THEME = "keyTheme";
 
     private SharedPreferences sharedPreferences;
 
     private RadioButton radioButtonLight;
     private RadioButton radioButtonDark;
-    private Button buttonReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         radioButtonLight = findViewById(R.id.radioButtonLight);
         radioButtonDark = findViewById(R.id.radioButtonDark);
-        buttonReturn = findViewById(R.id.button_return);
+        Button buttonReturn = findViewById(R.id.button_return);
 
         checkTheme();
 
