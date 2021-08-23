@@ -67,6 +67,14 @@ public class ListOfNotesFragment extends Fragment {
         }
     }
 
+    // activity создана, можно к ней обращаться. Выполним начальные действия
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        // определяем, можно ли будет расположить рядом заметку в другом фрагменте
+        isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
     // Сохраним текущую позицию (вызывается перед выходом из фрагмента)
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -74,14 +82,9 @@ public class ListOfNotesFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-
-    // activity создана, можно к ней обращаться. Выполним начальные действия
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        // определяем, можно ли будет расположить рядом заметку в другом фрагменте
-        isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
 
         // Если это не первое создание, то восстановим текущую позицию
         if (savedInstanceState != null) {
@@ -91,7 +94,6 @@ public class ListOfNotesFragment extends Fragment {
             // Если восстановить не удалось, то сделаем объект с первым индексом
             currentNote = notes[0];
         }
-
         // Если можно расположить рядом заметку, то сделаем это
         if (isLandscape) {
             showLandNote(currentNote);
