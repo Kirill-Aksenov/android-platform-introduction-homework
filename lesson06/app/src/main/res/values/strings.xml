@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">lesson06</string>
+    <string name="title01">Продукты</string>
+    <string name="title02">Лекарства</string>
+    <string name="title03">Квартплата</string>
+
+    <string name="content01">купить продукты</string>
+    <string name="content02">купить лекарства</string>
+    <string name="content03">оплатить квартиру</string>
+</resources>
