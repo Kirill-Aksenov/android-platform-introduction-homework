@@ -1,11 +1,15 @@
 package ru.geekbraines.lesson06;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -19,6 +23,8 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class ListOfNotesFragment extends Fragment {
+
+    private boolean isLandscape;
     private Note[] notes;
     private Note currentNote;
 
@@ -55,14 +61,64 @@ public class ListOfNotesFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     currentNote = note;
-                    showPortNote(currentNote);
+                    showNote(currentNote);
                 }
             });
         }
     }
 
+    // Сохраним текущую позицию (вызывается перед выходом из фрагмента)
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(NoteFragment.CURRENT_NOTE, currentNote);
+        super.onSaveInstanceState(outState);
+    }
+
+
+    // activity создана, можно к ней обращаться. Выполним начальные действия
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // определяем, можно ли будет расположить рядом заметку в другом фрагменте
+        isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        // Если это не первое создание, то восстановим текущую позицию
+        if (savedInstanceState != null) {
+            // Восстановление текущей позиции
+            currentNote = savedInstanceState.getParcelable(NoteFragment.CURRENT_NOTE);
+        } else {
+            // Если восстановить не удалось, то сделаем объект с первым индексом
+            currentNote = notes[0];
+        }
+
+        // Если можно расположить рядом заметку, то сделаем это
+        if (isLandscape) {
+            showLandNote(currentNote);
+        }
+    }
+
+    private void showNote(Note currentNote) {
+        if (isLandscape) {
+            showLandNote(currentNote);
+        } else {
+            showPortNote(currentNote);
+        }
+    }
+
+    private void showLandNote(Note currentNote) {
+        // Создаём новый фрагмент с текущей позицией для вывода заметки
+        NoteFragment fragment = NoteFragment.newInstance(currentNote);
+        // Выполняем транзакцию по замене фрагмента
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_for_notes, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
+
     // показать заметку в портретной ориентации
-    private void showPortNote(Note currentNote){
+    private void showPortNote(Note currentNote) {
         // Откроем вторую activity
         Intent intent = new Intent();
         intent.setClass(getActivity(), NoteActivity.class);

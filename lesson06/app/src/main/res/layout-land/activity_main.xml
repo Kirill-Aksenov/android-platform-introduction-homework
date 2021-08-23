@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!-- Фрагмент со списком заметок -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/listOfNotes"
+        android:name="ru.geekbraines.lesson06.ListOfNotesFragment"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <!-- Здесь будет отдельная заметка, которую выбрали в списке -->
+    <FrameLayout
+        android:id="@+id/container_for_notes"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>
