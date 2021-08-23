@@ -1,8 +1,11 @@
 package ru.geekbraines.lesson06;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
-public class Note {
+public class Note implements Parcelable {
     private String noteTitle;
     private String noteContent;
     private Calendar dateOfCreation;
@@ -11,6 +14,36 @@ public class Note {
         this.noteTitle = noteTitle;
         this.noteContent = noteContent;
         this.dateOfCreation = dateOfCreation;
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
+
+    protected Note(Parcel in) {
+        noteTitle = in.readString();
+        noteContent = in.readString();
+        dateOfCreation = (Calendar) in.readSerializable();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(noteTitle);
+        dest.writeString(noteContent);
+        dest.writeSerializable(dateOfCreation);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getNoteTitle() {
